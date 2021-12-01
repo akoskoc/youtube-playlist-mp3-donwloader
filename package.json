@@ -1,0 +1,12 @@
+{
+    "name": "yt-playlist-downloader",
+    "version": "0.0.1",
+    "description": "",
+    "main": "index.js",
+    "author": "",
+    "license": "ISC",
+    "dependencies": {
+        "googleapis": "^92.0.0",
+        "youtube-mp3-downloader": "^0.7.9"
+    }
+}

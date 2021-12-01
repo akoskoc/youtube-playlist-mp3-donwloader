@@ -6,7 +6,12 @@
     "author": "",
     "license": "ISC",
     "dependencies": {
+        "@tsconfig/node16": "^1.0.2",
+        "@types/node": "^16.11.11",
         "googleapis": "^92.0.0",
         "youtube-mp3-downloader": "^0.7.9"
+    },
+    "scripts": {
+        "compile": "tsc.cmd"
     }
 }

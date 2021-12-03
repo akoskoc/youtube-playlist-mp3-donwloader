@@ -7,11 +7,14 @@
     "license": "ISC",
     "dependencies": {
         "@tsconfig/node16": "^1.0.2",
+        "@types/fs-extra": "^9.0.13",
         "@types/node": "^16.11.11",
+        "fs-extra": "^10.0.0",
         "googleapis": "^92.0.0",
         "youtube-mp3-downloader": "^0.7.9"
     },
     "scripts": {
-        "compile": "tsc.cmd"
+        "compile": "tsc.cmd",
+        "start": "node ./build/index"
     }
 }

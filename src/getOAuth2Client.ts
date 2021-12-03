@@ -11,7 +11,7 @@ const CLIENT_SECRET_PATH = CREDENTIAL_DIR + "/client_secret.json";
 
 const SCOPES = "https://www.googleapis.com/auth/youtube.readonly";
 
-export default function getOAuth2Client() {
+export default function getOAuth2Client(): Promise<OAuth2Client> {
     return new Promise(async (resolve, reject) => {
         try {
             const clientSecret = await getClientSecretFromDisk();

@@ -15,6 +15,7 @@
     },
     "scripts": {
         "compile": "tsc.cmd",
+        "watch": "tsc.cmd --watch",
         "start": "node ./build/index"
     }
 }

@@ -2,7 +2,7 @@ import fs from "fs-extra";
 import { Credentials, OAuth2Client } from "google-auth-library";
 import { google } from "googleapis";
 import { ClientSecret } from "./types";
-import readline from "readline";
+import { ask } from "./utils";
 
 const OAuth2 = google.auth.OAuth2;
 const CREDENTIAL_DIR = process.cwd() + "/.credentials";
@@ -44,27 +44,23 @@ function getToken(oauth2Client: OAuth2Client): Promise<Credentials> {
                 access_type: "offline",
                 scope: SCOPES,
             });
-            const rl = readline.createInterface({
-                input: process.stdin,
-                output: process.stdout,
-            });
 
             console.log("Authorize this app by visiting this url: ", authUrl);
             console.log("\n");
-            rl.question("Enter the code from that page here: ", (code) => {
-                rl.close();
-                oauth2Client.getToken(code, (err, token) => {
-                    if (err || !token) {
-                        console.log(
-                            "Error while trying to retrieve access token",
-                            err
-                        );
-                        reject(err);
-                    } else {
-                        saveTokenToDisk(token);
-                        resolve(token);
-                    }
-                });
+
+            const code = await ask("Enter the code from that page here: ");
+
+            oauth2Client.getToken(code, (err, token) => {
+                if (err || !token) {
+                    console.log(
+                        "Error while trying to retrieve access token",
+                        err
+                    );
+                    reject(err);
+                } else {
+                    saveTokenToDisk(token);
+                    resolve(token);
+                }
             });
         }
     });

@@ -1,7 +1,7 @@
 import { ask } from "./utils";
 import { Playlist } from "./types";
 
-export default function getSelectedPlaylistName(
+export default function promptUserForPlaylistName(
     playlists: Playlist[]
 ): Promise<Playlist> {
     return new Promise(async (resolve, reject) => {

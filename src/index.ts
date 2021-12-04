@@ -5,6 +5,10 @@ import fs from "fs-extra";
 
 (async function () {
     const saveDir = await settings.getSaveDir();
+    const ffmpegLocation = await settings.getFfmpegLocation();
+    console.log(ffmpegLocation);
+
+    /*
     await youtubeApi.init();
 
     const playlists = await youtubeApi.getYtPlaylistNames();
@@ -21,4 +25,5 @@ import fs from "fs-extra";
         `${saveDir}/${selectedPlaylist.title}.json`,
         JSON.stringify(playlistItems)
     );
+    */
 })();

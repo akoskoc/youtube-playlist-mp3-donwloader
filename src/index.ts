@@ -1,5 +1,5 @@
 import youtubeApi from "./ytApi";
-import promptUserForPlaylistName from "./promptUserForPlaylistName";
+import askForPlaylistName from "./utils";
 import settings from "./settings";
 import fs from "fs-extra";
 
@@ -9,7 +9,7 @@ import fs from "fs-extra";
 
     const playlists = await youtubeApi.getYtPlaylistNames();
 
-    const selectedPlaylist = await promptUserForPlaylistName(playlists);
+    const selectedPlaylist = await askForPlaylistName(playlists);
 
     const playlistItems = await youtubeApi.getYtPlaylistItems(
         selectedPlaylist.id

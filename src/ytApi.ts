@@ -1,6 +1,6 @@
 import { OAuth2Client } from "google-auth-library";
 import { google } from "googleapis";
-import { Playlist } from "./types";
+import { Playlist, PlaylistItem } from "./types";
 
 export function getYtPlaylistNames(
     oauth2Client: OAuth2Client
@@ -43,6 +43,55 @@ export function getYtPlaylistNames(
             }
 
             resolve(playlists);
+        } catch (e) {
+            reject(e);
+        }
+    });
+}
+
+export function getYtPlaylistItems(
+    oauth2Client: OAuth2Client,
+    playlistId: string
+): Promise<PlaylistItem[]> {
+    return new Promise(async (resolve, reject) => {
+        try {
+            const yt = google.youtube("v3");
+            let playlistItems: PlaylistItem[] = [];
+            let nextPageToken = "";
+
+            while (true) {
+                let response = await yt.playlistItems.list({
+                    auth: oauth2Client,
+                    playlistId: playlistId,
+                    part: ["snippet"],
+                    maxResults: 50,
+                    pageToken: nextPageToken,
+                });
+
+                if (response.data.items) {
+                    for (const playlistItem of response.data.items) {
+                        if (
+                            playlistItem.snippet &&
+                            playlistItem.snippet.title &&
+                            playlistItem.snippet.resourceId &&
+                            playlistItem.snippet.resourceId.videoId
+                        ) {
+                            playlistItems.push({
+                                id: playlistItem.snippet.resourceId.videoId,
+                                title: playlistItem.snippet.title,
+                            });
+                        }
+                    }
+                }
+
+                if (!response.data.nextPageToken) {
+                    break;
+                }
+
+                nextPageToken = response.data.nextPageToken;
+            }
+
+            resolve(playlistItems);
         } catch (e) {
             reject(e);
         }

@@ -3,9 +3,10 @@ import { Credentials, OAuth2Client } from "google-auth-library";
 import { google } from "googleapis";
 import { ClientSecret } from "./types";
 import { ask } from "./utils";
+import settings from "./settings";
 
 const OAuth2 = google.auth.OAuth2;
-const CREDENTIAL_DIR = process.cwd() + "/.credentials";
+const CREDENTIAL_DIR = settings.getApplicationDir() + "/.credentials";
 const TOKEN_PATH = CREDENTIAL_DIR + "/token.json";
 const CLIENT_SECRET_PATH = CREDENTIAL_DIR + "/client_secret.json";
 

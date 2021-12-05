@@ -1,16 +1,12 @@
 import fs from "fs-extra";
 import path from "path";
-import { ask, askForPath } from "./utils";
+import { askForPath } from "./utils";
 import { SettingsFile } from "./types";
 
 const APPLICATION_DIR = __dirname;
 const SETTINGS_FILENAME = "settings.json";
 const FFMPEG_FILENAME = "ffmpeg.exe";
 const PATH_TO_SETTINGS_FILE = `${APPLICATION_DIR}/${SETTINGS_FILENAME}`;
-
-const ERR_APP_SETTINGS_NOT_INIT = new Error(
-    "Application settings are not initalized."
-);
 
 class Settings {
     private APPLICATION_DIR: string;

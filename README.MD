@@ -9,6 +9,7 @@ With this tool, all the sensitive information is in your control with the cost o
 * A playlist you wish to download from your own YouTube account. (No support for other playlists.)
 * [NodeJS](https://nodejs.org)
 * [Typescript](https://www.npmjs.com/package/typescript) for compilation.
+* [FFMPEG](https://www.ffmpeg.org/)
 * A project on [Google cloud](console.cloud.google.com/) for authentication.
 
 ### To make it work

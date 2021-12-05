@@ -11,6 +11,7 @@ export default function downloadSongs(
 ): Promise<true> {
     return new Promise(async (resolve, reject) => {
         try {
+            let counter = 0;
             const saveDir = `${await settings.getSaveDir()}/${playlist.title}`;
 
             fs.ensureDirSync(saveDir);
@@ -47,11 +48,13 @@ export default function downloadSongs(
                         playlistItem.id,
                         playlistItem.title + " id=" + playlistItem.id + ".mp3"
                     );
+                } else {
+                    counter++;
                 }
             }
 
             YD.on("finished", function (err, data) {
-                resolve(true);
+                counter++;
             });
 
             YD.on("error", (err) => {
@@ -59,9 +62,12 @@ export default function downloadSongs(
             });
 
             YD.on("progress", function (data) {
-                const progressMessage = `${data.videoId} ${formatBytes(
+                const progressMessage = `${counter}/${
+                    playlistItems.length
+                } current: ${formatBytes(
                     data.progress.transferred
                 )}/${formatBytes(data.progress.length)} `;
+
                 process.stdout.write(progressMessage + "\r");
             });
         } catch (e) {

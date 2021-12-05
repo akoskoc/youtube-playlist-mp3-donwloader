@@ -1,7 +1,7 @@
 {
-    "name": "yt-playlist-downloader",
+    "name": "yt-playlist-mp3-downloader",
     "version": "0.0.1",
-    "description": "",
+    "description": "A not user friendly youtube playlist mp3 downloader.",
     "main": "index.js",
     "author": "",
     "license": "ISC",
